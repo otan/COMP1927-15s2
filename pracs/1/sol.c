@@ -33,14 +33,19 @@ List createList(void) {
 
 /* but do change this! */
 int isSorted(List l) {
-    int sorted = 1;
-    Node curr = l->first;
-    Node prev = NULL;
-    for (curr = l->first; curr != NULL; prev = curr, curr = curr->next) {
-        if (prev) {
-            sorted &= (curr->data >= prev->data);
-        }
+    // 0-1 item lists always sorted
+    if (l->first == NULL || l->first->next == NULL) {
+        return 1;
     }
-    return sorted;
+    Node curr = l->first->next, prev = l->first;
+    while (curr != NULL) {
+        // make sure it is bigger than previous
+        if (curr->data < prev->data) {
+            return 0;
+        }
+        prev = curr;
+        curr = curr->next;
+    }
+    return 1;
 }
 
