@@ -1,5 +1,7 @@
 /* This is an edited interview question found commonly on glassdoor, and asked to me before.
  * There are two parts to this question.
+ * 
+ * Essence of question)
  * Check whether a doubly linked list, representing a string (without the NULL terminator) 
  * is a palindrome.
  *
@@ -8,7 +10,7 @@
  * e.g. isPalindrome([a]<->[a]) is True
  * e.g. isPalindrome([a]<->[s]<->[b]) is False
  *
- * Part 2) Ignore punctuation, and case (i.e. letters match)
+ * Part 2) Ignore punctuation, numbers and case. Only letters have to match.
  * e.g. isPalindrome([A]<->[,]->[ ]->[a]) is True
  * e.g. isPalindrome([A]->[,]) is True
  * e.g. isPalindrome([A]->[,]->[b]) is False
