@@ -52,8 +52,8 @@ int main(int argc, char *argv[]) {
     printf("* Part one passed! Not enough for asian father...\n");
 
     printf("* Testing part two...\n");
-    assert(isPalindrome(createWordList("\t")));
-    assert(isPalindrome(createWordList("22")));
+    assert(isPalindrome(createWordList("\t\n\t\t")));
+    assert(isPalindrome(createWordList("23435436362")));
     assert(isPalindrome(createWordList(",lol!")));
     assert(isPalindrome(createWordList(",lol lol")));
     assert(isPalindrome(createWordList("madam i'm adam")));
