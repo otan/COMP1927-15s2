@@ -1,0 +1,43 @@
+#!/bin/sh
+
+if [ -f tmp.file ]; then
+    echo "please delete tmp.file (rm tmp.file) before using"
+    exit
+fi
+
+arg="ranges"
+echo "============== testing $arg =============="
+echo "=== Compiling $arg"
+if ! gcc -U_FORTIFY_SOURCE -Wall -Werror -O -o $arg $arg.c; then
+    echo "===== [ERROR] your program $arg.c did not compile. aborting! =====" 
+    exit
+fi
+echo "=== Compile Successful ==="
+
+echo "=== Running Tests ==="
+for f in tests/*.in
+do
+   
+    echo "== testing $f =="
+    echo "= Our Input ="
+    for line in "$(cat $f)"
+    do
+        echo $line
+    done
+    echo "= Your Output ="
+    ./$arg < $f
+    ans="`echo "$f" | sed -r -e "s/\.in//g"`.out"
+    #./$arg < $f > $ans # answer generation!
+    ./$arg < $f > tmp.file
+    if ! diff tmp.file $ans > /dev/null; then
+        echo "== [ERROR] expected output =="
+        cat $ans
+        echo "=== you have failed a test. please review it and try again ==="
+        rm tmp.file
+        exit
+    fi
+    echo "== passed $f =="
+done    
+echo "============ all tests passed for $arg - you are awesome! =========="
+
+rm tmp.file
