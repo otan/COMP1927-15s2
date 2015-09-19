@@ -1,0 +1,6 @@
+remove printfs
+put repeated functionality into functions
+remove debugging comments
+compiling > working
+TEST ON CSE
+no windows line endings pls
