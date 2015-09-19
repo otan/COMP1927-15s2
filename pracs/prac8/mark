@@ -1,0 +1,42 @@
+#!/bin/sh
+
+# WHY ARE YOU LOOKING AT THIS FILE?
+# ARE YOU BEING A HOOLIGAN? (Houlahan pun here)
+
+rm tmp.file tmp.file.2
+
+echo "************* testing *************"
+echo "** Compiling..."
+if ! gcc -U_FORTIFY_SOURCE -Wall -Werror -O -o testGraph testGraph.c Graph.c Queue.c; then
+    echo "***** [ERROR] your program did not compile. aborting! *****" 
+    exit
+fi
+
+echo "** Compile Successful"
+
+echo "** Running Tests"
+for i in `seq 0 29` 
+do
+    echo "* Running \"./testGraph $i\""
+    # ./testGraph $i > expected/$i.out # answer generation!
+    valgrind ./testGraph $i > tmp.file 2> tmp.file.2
+    if ! diff tmp.file expected/$i.out > /dev/null; then
+        echo "* Your Output: "
+        cat tmp.file
+        echo "* [ERROR] expected output:"
+        cat expected/$i.out
+        echo "** you have failed a test. please review it and try again"
+        rm tmp.file tmp.file.2
+        exit
+    fi
+    if ! grep "no leaks are possible" tmp.file.2 > /dev/null; then
+        echo "* test passed, but there is a memory leak!"
+        echo "* use 'valgrind ./testGraph $i' to diagnose the cause"
+        rm tmp.file tmp.file.2
+        exit
+    fi
+    echo "** passed!"
+done    
+echo "*** all tests passed - asian father approves!"
+
+rm tmp.file tmp.file.2
