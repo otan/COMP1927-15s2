@@ -1,0 +1,17 @@
+pq = new priority queue;
+st = new array, size of vertices, initialised to zero
+
+choose a starting vertex
+for all edges connecting to the starting vertex:
+    add it to the pq
+
+while the priority queue is not empty, and number vertices != number of vertices connected:
+    take edge off priority queue
+
+    if both edge endpoints have an element in st:
+        continue
+    take (from, to) from the edge
+    st[to] = from
+
+    for each edge connected to to:
+        add it to the pq if either edge doesn't have an element in st
