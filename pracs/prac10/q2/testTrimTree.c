@@ -47,6 +47,6 @@ int main(int argc, char **argv) {
     assert(threeitem->left->item == 9);
     freeTree(threeitem);
 
-    printf("all tests passed! but will you pass the final tests...\n");
+    printf("all tests passed! you are awesome!\n");
     return EXIT_SUCCESS;
 }

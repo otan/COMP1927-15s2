@@ -26,7 +26,18 @@ int main(int argc, char **argv) {
     printf("three item tree\n");
     t->left->left = createNode(3);
     assert(!isHeightBalanced(t));
+    printf("four item tree\n");
+    t->right = createNode(4);
+    assert(isHeightBalanced(t));
+    t->right->left = createNode(4);
+    assert(isHeightBalanced(t));
+    t->right->right = createNode(4);
+    assert(isHeightBalanced(t));
+    t->right->right->right = createNode(4);
+    assert(isHeightBalanced(t));
+    t->right->right->right->left = createNode(4);
+    assert(!isHeightBalanced(t));
 
-    printf("all tests passed! but will you pass the final tests...\n");
+    printf("all tests passed! asian father approves\n");
     return EXIT_SUCCESS;
 }
